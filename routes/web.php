@@ -20,4 +20,5 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'characters'], function () use ($router) {
     $router->post('/', 'CharacterController@store');
     $router->get('/', 'CharacterController@index');
+    $router->put('/{id}', 'CharacterController@update');
 });

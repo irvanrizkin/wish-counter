@@ -40,4 +40,29 @@ class CharacterController extends Controller
             'characters' => $characters,
         ], 200);
     }
+
+    public function update($id, Request $request) {
+        $character = Character::find($id);
+
+        if (!$character) {
+            return response()->json([
+                'message' => 'character not found',
+                'status' => 'fail',
+            ], 404);
+        }
+
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:100'],
+            'pity' => ['required', 'integer'],
+            'banner' => ['required', 'string', 'max:20'],
+        ]);
+
+        $character->update($request->all());
+
+        return response()->json([
+            'message' => 'character updated successfully',
+            'status' => 'success',
+            'characters' => $character,
+        ], 200);
+    }
 }
