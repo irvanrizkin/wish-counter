@@ -31,4 +31,13 @@ class CharacterController extends Controller
             'status' => 'success'
         ], 200);
     }
+
+    public function index() {
+        $characters = Character::all();
+        return response()->json([
+            'message' => 'characters grabbed successfully',
+            'status' => 'success',
+            'characters' => $characters,
+        ], 200);
+    }
 }
